@@ -8,6 +8,10 @@ This project demonstrates a custom momentum like scroll effect (with custom) whe
 - **Custom Scrollbar:** The scrollbar is custom designed with a dynamic thumb that adjusts its size and position based on the page scroll.
 - **Full-Screen Sections:** The content is divided into fullscreen sections, making it suitable for visually rich, scroll driven websites or landing pages.
 
+## Demo
+
+![Momentum Scroll Demo](assets/scroll-demo.gif)
+
 ## Installation
 
 1. Clone the repository to your local machine:

@@ -7,7 +7,6 @@
 body {
 	height: 400vh;
 	font-family: sans-serif;
-	overflow-y: scroll;
 	overflow: hidden;
 }
 
@@ -28,7 +27,11 @@ body {
 	border-radius: 4px;
 	height: 50px;
 	transform: translateY(0);
-	transition: background 0.2s;
+	cursor: auto;
+}
+
+#thumb:active {
+	cursor: auto;
 }
 
 #thumb:hover {

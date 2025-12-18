@@ -5,22 +5,27 @@ let currentScroll = 0;
 let targetScroll = 0;
 const ease = 0.08;
 
+let isDragging = false;
+let startY = 0;
+let startScroll = 0;
+
 function update() {
-	targetScroll = window.scrollY;
+	const contentHeight = container.scrollHeight;
+	const viewportHeight = window.innerHeight;
+	const maxScroll = contentHeight - viewportHeight;
+
+	targetScroll = Math.max(0, Math.min(maxScroll, targetScroll));
 	currentScroll += (targetScroll - currentScroll) * ease;
 
 	container.style.transform = `translateY(${-currentScroll}px)`;
 
-	// Update custom scrollbar thumb
-	const contentHeight = container.scrollHeight;
-	const viewportHeight = window.innerHeight;
-
+	// Scrollbar thumb size
 	const thumbHeight = (viewportHeight / contentHeight) * viewportHeight;
 	thumb.style.height = `${thumbHeight}px`;
 
-	const thumbY =
-		(currentScroll / (contentHeight - viewportHeight)) *
-		(viewportHeight - thumbHeight);
+	// Thumb position
+	const thumbY = (currentScroll / maxScroll) * (viewportHeight - thumbHeight);
+
 	thumb.style.transform = `translateY(${thumbY}px)`;
 
 	requestAnimationFrame(update);
@@ -28,7 +33,36 @@ function update() {
 
 update();
 
-// scroll page with wheel as usual
+/* Wheel scrolling */
 window.addEventListener("wheel", (e) => {
-	window.scrollBy({ top: e.deltaY, behavior: "auto" });
+	targetScroll += e.deltaY;
+});
+
+/* Thumb drag */
+thumb.addEventListener("mousedown", (e) => {
+	isDragging = true;
+	startY = e.clientY;
+	startScroll = targetScroll;
+	document.body.style.userSelect = "none";
+});
+
+window.addEventListener("mousemove", (e) => {
+	if (!isDragging) return;
+
+	const contentHeight = container.scrollHeight;
+	const viewportHeight = window.innerHeight;
+	const maxScroll = contentHeight - viewportHeight;
+
+	const thumbHeight = (viewportHeight / contentHeight) * viewportHeight;
+	const maxThumbMove = viewportHeight - thumbHeight;
+
+	const deltaY = e.clientY - startY;
+	const scrollDelta = (deltaY / maxThumbMove) * maxScroll;
+
+	targetScroll = startScroll + scrollDelta;
+});
+
+window.addEventListener("mouseup", () => {
+	isDragging = false;
+	document.body.style.userSelect = "";
 });

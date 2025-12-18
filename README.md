@@ -10,7 +10,9 @@ This project demonstrates a custom momentum like scroll effect (with custom) whe
 
 ## Demo
 
-![Momentum Scroll Demo](assets/scroll-demo.gif)
+<p align="center">
+  <img src="assets/scroll-demo.gif" width="800" />
+</p>
 
 ## Installation
 

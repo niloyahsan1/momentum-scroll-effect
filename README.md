@@ -14,6 +14,9 @@ This project demonstrates a custom momentum like scroll effect (with custom) whe
   <img src="assets/scroll-demo.gif" width="800" />
 </p>
 
+## Try Out
+[Click here for live preview](https://niloyahsan1.github.io/momentum-scroll-effect/)
+
 ## Installation
 
 1. Clone the repository to your local machine:
